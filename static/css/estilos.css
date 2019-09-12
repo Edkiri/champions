@@ -1,0 +1,186 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+h1 {
+  display: inline;
+  margin: 0;
+  font-size: 1.6em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+header {
+  background-color: lightseagreen;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu {
+  display: inline-block;
+  font-size: 1.2em;
+  padding-right: 10px;
+}
+
+.menu ol {
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+.menu li {
+  padding: 0 10px;
+}
+
+
+.container {
+  width: 850px;
+  margin: auto;
+}
+
+h5 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 2em;
+}
+
+.hero {
+  background-image: url(../img/futbol.jpg);
+  background-size: cover;
+  height: 510px;
+  display: flex;
+  background-position: center;
+  align-items: center;
+}
+
+.hero-overlay {
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  width: 300px;
+  padding: 30px;
+  height: max-content;
+  justify-content: center;
+  margin-left: 60px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.hero-overlay {
+  font-size: 1.2em;
+}
+
+.sign-up {
+  text-decoration: none;
+  color: black;
+  background-color: lawngreen;
+  border-radius: 5px;
+  border: 2px solid black;
+  padding: 5px;
+}
+
+.tournaments {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tournaments-title {
+  display: inline-block;
+  font-size: 1.8em;
+  margin: 20px 0px;
+}
+
+.tournament-card {
+  border: 1px solid black;
+  width: 29%;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 50px;
+}
+.tournament-img {
+  margin-bottom: 10px;
+  width: 100%;
+  height: 140px;
+}
+
+.check-buttom {
+  border: 1px solid black;
+  padding: 5px 3px;
+  font-style: italic;
+  width: max-content;
+  margin: auto;
+}
+
+table {
+  width: 55%;
+  margin: auto;
+}
+caption {
+  padding: 5px;
+  text-align: left;
+  font-weight: bold;
+  background-color: rgb(242,230,227);
+}
+
+.stage-phase td {
+  width: 7.7%;
+  text-align: center;
+  vertical-align: center;
+  padding: 0.3em;
+  border-top: 1px solid grey;
+}
+.leyenda td {
+  border: none!important;
+  color: grey;
+  font-weight: 100;
+}
+
+tr {
+  border-top: 1px solid grey;
+}
+
+.team-name {
+  width: 30%!important;
+  text-align: left!important;
+}
+
+.column_final .local {
+  text-align: left;
+  width: 30%;
+}
+.column_final .visit {
+  text-align: right;
+  width: 30%;
+}
+
+.img-final {
+  width: 1%;
+}
+
+.final-phase  tr td {
+  padding: 5px;
+}
+
+.final-phase caption {
+  padding: 20px 5px;
+}
+
+.result {
+  text-align: center;
+}
+
+.signup-form input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 1px;
+}
+
+.profile-pic {
+  width: 35px;
+}

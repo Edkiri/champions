@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+  <title>home</title>
+{% endblock %}
+
+{% block container %}
+  <div class="hero">
+    <div class="hero-overlay">
+        {% if not user.is_authenticated %}
+          <h5>Únetenos!</h5>
+        {% endif %}
+        <p>Compite con tus amigos.</p>
+        <p>Acierta los resultados de los partidos y gana puntos.</p>
+        {% if not user.is_authenticated %}
+          <a class="sign-up" href="">Sign up!</a>
+        {% endif %}
+    </div>
+  </div>
+
+  <h3 class="tournaments-title">Torneos recientes</h3>
+  <section class="tournaments">
+    {% for tournament in object_list %}
+      <div class="tournament-card">
+        <h4>{{tournament.name}}</h4>
+        <p><strong>Fecha: </strong><small>{{tournament.start_date}}</small></p>
+        <img class="tournament-img" src="{{ tournament.image.url }}" alt="{{ tournament.image.name }}">
+        <a href="{% url 'tournaments:tournament-detail' tournament.pk %}"><p class="check-buttom">Ver resultados<small>>></small></p></a>
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}

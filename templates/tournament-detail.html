@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+  <title>{{object.name}}</title>
+{% endblock%}
+
+{% block container %}
+<h3 style="text-align: center">{{tournament.name}}</h3>
+{% for group in groups %}
+  <table class="stage-phase">
+  <caption>{{group.name}}</caption>
+
+  <tr class="leyenda">
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>PJ</td>
+    <td>G</td>
+    <td>E</td>
+    <td>P</td>
+    <td>GF</td>
+    <td>GC</td>
+    <td>AG</td>
+    <td>Pts</td>
+  </tr>
+  
+    {% for team in group.teams.all %}
+      <tr>
+        <td>{{team.position}}</td>
+        <td>
+          {% if team.image %}
+            <img src="{{team.image.url}}" alt="" width=20px>
+          {% else %}
+          <img src="{% static 'img/champions' %}" alt="" width=20px>
+          {% endif %}
+        </td>
+        <td class="team-name">{{team.name}}</td>
+        <td>{{team.match_played}}</td>
+        <td>{{team.won}}</td>
+        <td>{{team.tied}}</td>
+        <td>{{team.lost}}</td>
+        <td>{{team.goals_scored}}</td>
+        <td>{{team.goals_received}}</td>
+        <td>{{team.average_goal}}</td>
+        <td>{{team.points}}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endfor %}
+
+<table class="final-phase">
+  <caption>{{quarters.name}}</caption>
+  {% for match in quarters.matchs.all %}
+    <tr class="column_final">
+      <td class="img-final"><img src="{{match.local.image.url}}" alt="" width=20px></td>
+      <td class="local"><span>{{match.local}}</span></td>
+      <td class="result"><span>{{match.goals_local}}-{{match.goals_visit}}</span></td>
+      <td class="visit"><span>{{match.visit}}</span></td>
+      <td class="img-final"><img src="{{match.visit.image.url}}" alt="" width=20px></td>
+    </tr>
+  {% endfor %}
+</table>
+
+<table class="final-phase">
+  <caption>{{semis.name}}</caption>
+  {% for match in semis.matchs.all %}
+  <tr class="column_final">
+    <td class="img-final"><img src="{{match.local.image.url}}" alt="" width=20px></td>
+    <td class="local"><span>{{match.local}}</span></td>
+    <td class="result"><span>{{match.goals_local}}-{{match.goals_visit}}</span></td>
+    <td class="visit"><span>{{match.visit}}</span></td>
+    <td class="img-final"><img src="{{match.visit.image.url}}" alt="" width=20px></td>
+  </tr>
+  {% endfor %}
+</table>
+
+<table class="final-phase">
+    <caption>{{third_and_fourth.name}}</caption>
+    <tr class="column_final">
+        <td class="img-final"><img src="{{third_and_fourth.matchs.first.local.image.url}}" alt="" width=20px></td>
+        <td class="local"><span>{{third_and_fourth.matchs.first.local}}</span></td>
+        <td class="result"><span>{{third_and_fourth.matchs.first.goals_local}}-{{third_and_fourth.matchs.first.goals_visit}}</span></td>
+        <td class="visit"><span>{{third_and_fourth.matchs.first.visit}}</span></td>
+        <td class="img-final"><img src="{{third_and_fourth.matchs.first.visit.image.url}}" alt="" width=20px></td>
+    </tr>
+  </table>
+
+<table class="final-phase">
+  <caption>{{final.name}}</caption>
+  <tr class="column_final">
+      <td class="img-final"><img src="{{final.matchs.first.local.image.url}}" alt="" width=20px></td>
+      <td class="local"><span>{{final.matchs.first.local}}</span></td>
+      <td class="result"><span>{{final.matchs.first.goals_local}}-{{final.matchs.first.goals_visit}}</span></td>
+      <td class="visit"><span>{{final.matchs.first.visit}}</span></td>
+      <td class="img-final"><img src="{{final.matchs.first.visit.image.url}}" alt="" width=20px></td>
+  </tr>
+</table>
+
+
+
+{% endblock %}

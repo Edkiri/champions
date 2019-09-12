@@ -1,0 +1,8 @@
+*__pycache__
+equipos.csv
+partidos.csv
+media
+migrations
+csv-to-db.txt
+db.sqlite3
+champions/settings.py
