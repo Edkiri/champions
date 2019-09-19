@@ -1,3 +1,4 @@
 from .tournaments import *
-# from .teams import *
-# from .matchs import *
+from .groups import *
+from .matchs import *
+from .teams import *
