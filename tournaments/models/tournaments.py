@@ -8,7 +8,7 @@ class Tournament(models.Model):
 
   name = models.CharField(max_length=80)
   slug_name = models.SlugField()
-  start_date = models.DateTimeField('Start at', help_text='Date time on which the tournamet starts.')
+  start_date = models.DateTimeField('Start at', help_text='Date time on which the tournament starts.')
   image = models.ImageField(
     'tournament image',
     upload_to='tournamets/images/',
