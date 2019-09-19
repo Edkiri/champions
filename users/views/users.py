@@ -17,7 +17,8 @@ from users.serializers import (
   AccountVerificationSerializer,
   UserLoginSerializer,
   UserModelSerializer,
-  UserSignUpSerializer
+  UserSignUpSerializer,
+	ProfileModelSerializer
 )
 
 class UserViewSet(mixins.RetrieveModelMixin,
@@ -69,3 +70,19 @@ class UserViewSet(mixins.RetrieveModelMixin,
 		serializer.save()
 		data = {'message': 'Congrats, go to share some rides!'}
 		return Response(data, status=status.HTTP_200_OK)
+
+	@action(detail=True, methods=['put', 'patch'])
+	def profile(self, request, *args, **kwargs):
+		"""Update profile data."""
+		user = self.get_object()
+		profile = user.profile
+		partial = request.method == 'PATCH'
+		serializer = ProfileModelSerializer(
+			profile,
+			data=request.data,
+			partial=partial
+		)
+		serializer.is_valid(raise_exception=True)
+		serializer.save()
+		data = UserModelSerializer(user).data
+		return Response(data)
