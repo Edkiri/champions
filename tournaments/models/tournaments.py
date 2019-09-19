@@ -4,11 +4,7 @@
 from django.db import models
 
 class Tournament(models.Model):
-  """Champion base model 
-  
-  Tournamet acts as an abstract base class from which every
-  other tournament in the project will inherit.
-  """
+  """Tournament model"""
 
   name = models.CharField(max_length=80)
   slug_name = models.SlugField()

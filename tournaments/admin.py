@@ -6,8 +6,8 @@ from tournaments.models import (
   Match,
   TournamentGroup,
   Team,
-  Player,
-  Tournament
+  Tournament,
+  Matchday
 )
 
 class TournamentAdmin(admin.ModelAdmin):
@@ -17,4 +17,4 @@ admin.site.register(Tournament, TournamentAdmin)
 admin.site.register(Match, TournamentAdmin)
 admin.site.register(Team, TournamentAdmin)
 admin.site.register(TournamentGroup, TournamentAdmin)
-admin.site.register(Player, TournamentAdmin)
+admin.site.register(Matchday, TournamentAdmin)

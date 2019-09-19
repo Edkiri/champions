@@ -14,6 +14,7 @@ class Match(models.Model):
   goals_local = models.PositiveSmallIntegerField(default=0)
   goals_visit = models.PositiveSmallIntegerField(default=0)
 
+  date = models.DateTimeField()
 
   WINNERS = (
     ('L', 'Local'),
@@ -28,4 +29,4 @@ class Match(models.Model):
   def __str__(self):
     """Return team vs team."""
 
-    return "{}({}) vs {}({})".format(str(self.local),self.goals_local, str(self.visit),self.goals_visit)
+    return "{}({}) vs {}({})".format(str(self.local),self.goals_local, str(self.visit),self.goals_visit) + " at " + self.date.strftime("%m/%d, %H:%M")

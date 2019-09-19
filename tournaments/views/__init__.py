@@ -1,1 +1,1 @@
-from .copa_america_2019 import *
+from .tournaments import *
