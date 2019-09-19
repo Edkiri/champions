@@ -23,7 +23,7 @@ class Tournament(models.Model):
   )
 
   def __str__(self):
-    """Return Turnamet name."""
+    """Return Turnament name."""
     return self.name
 
 
