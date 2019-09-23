@@ -6,14 +6,11 @@ from rest_framework import serializers
 # Models
 from tournaments.models import Match
 
-# Serializers 
-from .teams import TeamModelSerializer
-
 class MatchModelSerializer(serializers.ModelSerializer):
   """Match model serializer."""
 
-  local = TeamModelSerializer(read_only=True)
-  visit = TeamModelSerializer(read_only=True)
+  local = serializers.StringRelatedField()
+  visit = serializers.StringRelatedField()
 
   class Meta:
     """Meta class."""
@@ -25,4 +22,5 @@ class MatchModelSerializer(serializers.ModelSerializer):
       'goals_local',
       'goals_visit',
       'date',
+      'winners'
     )
