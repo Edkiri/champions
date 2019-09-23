@@ -19,6 +19,7 @@ class Match(models.Model):
   WINNERS = (
     ('L', 'Local'),
     ('V', 'Visit'),
+    ('T', 'Tie'),
   )
   winners = models.CharField(max_length=1, choices=WINNERS)
   @property
