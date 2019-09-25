@@ -1,19 +1,17 @@
-# Users urls
+"""Users URLs."""
 
 # Django
-from django.urls import path
+from django.urls import include, path
+
+# Django REST Framework
+from rest_framework.routers import DefaultRouter
 
 # Views
-from users import views
+from .views import users as user_views
+
+router = DefaultRouter()
+router.register(r'users', user_views.UserViewSet, basename='users')
 
 urlpatterns = [
-  path('signup/', views.SignupView.as_view(), name='signup'),
-  path('login/', views.LoginView.as_view(), name='login'),
-  path('logout/', views.LogoutView.as_view(), name='logout'),
-  path('me/profile', views.ProfileUpdateView.as_view(), name='update'),
-	path(
-		route='<str:username>', 
-		view=views.UserDetailView.as_view(),
-		name='detail'
-  ),
+  path('', include(router.urls)),
 ]

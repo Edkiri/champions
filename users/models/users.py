@@ -40,6 +40,12 @@ class User(ChampionBaseModel, AbstractUser):
     help_text='Set to true when the user have verified its email address.'
   )
 
+  is_active = models.BooleanField(
+    'active',
+    default=True,
+    help_text='Set to False when the user delete his account'
+  )
+
   def __str__(self):
     """Return username."""
     return self.username

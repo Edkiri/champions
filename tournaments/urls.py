@@ -1,13 +1,17 @@
-"""Champions urls."""
+"""Tournaments URLs."""
 
 # Django
-from django.urls import path
+from django.urls import include, path
+
+# Django REST Framework
+from rest_framework.routers import DefaultRouter
 
 # Views
-from tournaments.views import HomeView, TournamentDetailView
+from .views import tournaments as tournaments_views
 
+router = DefaultRouter()
+router.register(r'tournaments', tournaments_views.TournamentViewSet, basename='tournaments')
 
 urlpatterns = [
-  path('home/', HomeView.as_view(), name="home"),
-  path('tournaments/<int:pk>/', TournamentDetailView.as_view(), name='tournament-detail')
+  path('', include(router.urls)),
 ]
