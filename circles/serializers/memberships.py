@@ -62,13 +62,6 @@ class AddMemberSerializer(serializers.Serializer):
       raise serializers.ValidationError('Invalid invitation code.')
     self.context['invitation'] = invitation
     return data
-
-  # def validate(self, data):
-  #   """Verify circle is capable of accepting a new member."""
-  #   circle = self.context['circle']
-  #   if circle.is_limited and circle.members.count() >= circle.members_limit:
-  #     raise serializers.ValidationError('Circle has reached its member limit :(')
-  #   return data
     
   def create(self, data):
     """Create new circle member."""
