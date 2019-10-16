@@ -12,5 +12,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('users.urls', 'users'), namespace='users')),
-    path('', include(('tournaments.urls', 'tournaments'), namespace='tournamets')),
+    path('', include(('tournaments.urls', 'tournaments'), namespace='tournaments')),
+    path('', include(('circles.urls', 'circles'), namespace='circles')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

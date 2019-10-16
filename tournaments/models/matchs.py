@@ -3,7 +3,6 @@
 # Django
 from django.db import models
 
-
 class Match(models.Model):
   """Match model."""
 
