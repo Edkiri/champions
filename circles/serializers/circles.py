@@ -28,4 +28,5 @@ class CircleModelSerializer(serializers.ModelSerializer):
     read_only_fields = (
       'is_public',
       'verified',
+      'is_admin'
     )

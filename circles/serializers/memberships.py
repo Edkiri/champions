@@ -23,11 +23,12 @@ class MembershipModelSerializer(serializers.ModelSerializer):
 
     model = Membership
     fields = (
-      'user', 'is_admin', 'is_active', 'used_invitations', 'remaining_invitations', 'invited_by',)
+      'user', 'is_admin', 'is_active', 'used_invitations', 'remaining_invitations', 'invited_by')
     read_only_fields = (
       'user',
       'used_invitations',
       'invited_by',
+      'is_admin'
     )
 
 class AddMemberSerializer(serializers.Serializer):
@@ -62,12 +63,12 @@ class AddMemberSerializer(serializers.Serializer):
     self.context['invitation'] = invitation
     return data
 
-  def validate(self, data):
-    """Verify circle is capable of accepting a new member."""
-    circle = self.context['circle']
-    if circle.is_limited and circle.members.count() >= circle.members_limit:
-      raise serializers.ValidationError('Circle has reached its member limit :(')
-    return data
+  # def validate(self, data):
+  #   """Verify circle is capable of accepting a new member."""
+  #   circle = self.context['circle']
+  #   if circle.is_limited and circle.members.count() >= circle.members_limit:
+  #     raise serializers.ValidationError('Circle has reached its member limit :(')
+  #   return data
     
   def create(self, data):
     """Create new circle member."""

@@ -10,9 +10,9 @@ from rest_framework.generics import get_object_or_404
 from circles.serializers import MembershipModelSerializer, AddMemberSerializer
 
 # Permissions
-# from rest_framework.permissions import IsAuthenticated
-# from circles.permissions.memberships import IsActiveCircleMember
-# from circles.permissions.invitations import IsSelfMember
+from rest_framework.permissions import IsAuthenticated
+from circles.permissions.memberships import IsActiveCircleMember
+from circles.permissions.invitations import IsSelfMember
 
 # Model
 from circles.models import Circle, Membership, Invitation
@@ -33,14 +33,14 @@ class MembershipViewSet(mixins.ListModelMixin,
     self.circle = get_object_or_404(Circle, slug_name=slug_name)
     return super(MembershipViewSet, self).dispatch(request, *args, **kwargs)
 
-  # def get_permissions(self):
-  #   """Assign permissions based on action."""
-  #   permissions = [IsAuthenticated]
-  #   if self.action != 'create':
-  #     permissions.append(IsActiveCircleMember)
-  #   if self.action == "invitations":
-  #     permissions.append(IsSelfMember)
-  #   return [p() for p in permissions]
+  def get_permissions(self):
+    """Assign permissions based on action."""
+    permissions = [IsAuthenticated]
+    if self.action != 'create':
+      permissions.append(IsActiveCircleMember)
+    if self.action == "invitations":
+      permissions.append(IsSelfMember)
+    return [p() for p in permissions]
 
   def get_queryset(self):
     """Return circle members."""
@@ -52,11 +52,11 @@ class MembershipViewSet(mixins.ListModelMixin,
   def get_object(self):
     """Return the circle member by using the user's username."""
     return get_object_or_404(
-      Membership,
-      user__username=self.kwargs['username'],
-      circle=self.circle,
-      is_active=True
-    )
+    Membership,
+    user__username=self.kwargs['pk'],
+    circle=self.circle,
+    is_active=True
+  )
 
   def perform_destroy(self, instance):
     """Disable membership."""
