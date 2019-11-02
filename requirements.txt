@@ -10,7 +10,7 @@ django-oauth-toolkit==1.2.0
 djangorestframework==3.9.4
 idna==2.8
 oauthlib==3.1.0
-Pillow==6.0.0
+Pillow==6.2.0
 pycparser==2.19
 PyJWT==1.7.1
 pytz==2019.1
