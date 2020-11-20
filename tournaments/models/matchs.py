@@ -9,8 +9,18 @@ class Match(models.Model):
   tournament = models.ForeignKey('tournaments.Tournament', on_delete=models.CASCADE)
   group = models.ForeignKey('tournaments.Group', on_delete=models.CASCADE)
 
-  local = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE, related_name="local")
-  visit = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE, related_name="visit")
+  local = models.ForeignKey(
+    'tournaments.Team', 
+    on_delete=models.CASCADE, 
+    related_name="local",
+    null=True
+    )
+  visit = models.ForeignKey(
+    'tournaments.Team', 
+    on_delete=models.CASCADE, 
+    related_name="visit",
+    null=True
+    )
 
   goals_local = models.PositiveSmallIntegerField(default=0)
   goals_visit = models.PositiveSmallIntegerField(default=0)
