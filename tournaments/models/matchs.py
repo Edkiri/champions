@@ -24,11 +24,11 @@ class Match(models.Model):
 
   @property
   def winning_team(self):
-      if self.goals_local == self.goals_visit:
-        return None
-      elif self.goals_local > self.goals_visit:
-        return self.local
-      return self.visit
+    if self.goals_local == self.goals_visit:
+      return None
+    elif self.goals_local > self.goals_visit:
+      return self.local
+    return self.visit
   
   def __str__(self):
     """Return team vs team."""
