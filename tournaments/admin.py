@@ -4,10 +4,11 @@ from django.contrib import admin
 # Models
 from tournaments.models import (
   Match,
-  TournamentGroup,
+  Group,
   Team,
   Tournament,
-  Matchday
+  Player,
+  TeamGroupStage
 )
 
 class TournamentAdmin(admin.ModelAdmin):
@@ -16,5 +17,6 @@ class TournamentAdmin(admin.ModelAdmin):
 admin.site.register(Tournament, TournamentAdmin)
 admin.site.register(Match, TournamentAdmin)
 admin.site.register(Team, TournamentAdmin)
-admin.site.register(TournamentGroup, TournamentAdmin)
-admin.site.register(Matchday, TournamentAdmin)
+admin.site.register(Group, TournamentAdmin)
+admin.site.register(Player, TournamentAdmin)
+admin.site.register(TeamGroupStage, TournamentAdmin)
