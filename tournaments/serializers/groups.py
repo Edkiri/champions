@@ -4,22 +4,42 @@
 from rest_framework import serializers
 
 # Models
-from tournaments.models import TournamentGroup
+from tournaments.models import Group, TeamGroupStage
 
 # Serializers
-from .matchs import MatchModelSerializer
+from tournaments.serializers.teams import TeamModelSerializer
 
-class TournamentGroupModelSerializer(serializers.ModelSerializer):
-  """Tournament groups model serializer."""
+class TeamGroupStageSerializer(serializers.ModelSerializer):
+  """ Team Group Stage Stats Serializer."""
 
-  matchs = MatchModelSerializer(many=True)
+  team = serializers.StringRelatedField()
 
   class Meta:
     """Meta class."""
 
-    model = TournamentGroup
+    model = TeamGroupStage
     fields = (
-      'name',
+      'team',
+      'points',
+      'won',
+      'lost',
+      'tied',
+      'goals_scored',
+      'goals_received',
+      'matchs_played'
+    )
+
+class GroupModelSerializer(serializers.ModelSerializer):
+  """Tournament groups model serializer."""
+
+  teams = TeamGroupStageSerializer(many=True)
+
+  class Meta:
+    """Meta class."""
+
+    model = Group
+    fields = (
       'phase',
-      'matchs'
+      'name',
+      'teams'
     )

@@ -15,9 +15,5 @@ class TeamModelSerializer(serializers.ModelSerializer):
     model = Team
     fields = (
       'name',
-      'won',
-      'lost',
-      'tied',
-      'average_goal',
-      'position'
+      'image'
     )

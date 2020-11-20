@@ -6,27 +6,31 @@ from django.db import models
 class Match(models.Model):
   """Match model."""
 
-  local = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE, related_name="locals")
+  tournament = models.ForeignKey('tournaments.Tournament', on_delete=models.CASCADE)
+  group = models.ForeignKey('tournaments.Group', on_delete=models.CASCADE)
 
-  visit = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE, related_name="visits")
+  local = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE, related_name="local")
+  visit = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE, related_name="visit")
 
   goals_local = models.PositiveSmallIntegerField(default=0)
   goals_visit = models.PositiveSmallIntegerField(default=0)
 
-  date = models.DateTimeField()
+  start_date = models.DateTimeField()
 
-  WINNERS = (
-    ('L', 'Local'),
-    ('V', 'Visit'),
-    ('T', 'Tie'),
-  )
-  winners = models.CharField(max_length=1, choices=WINNERS)
+  is_finished = models.BooleanField(default=False)
+
+  # True when opponents are defined
+  is_defined = models.BooleanField(default=False)
+
   @property
   def winning_team(self):
-      return self.local if self.winners == 'L' else self.visit
+      if self.goals_local == self.goals_visit:
+        return None
+      elif self.goals_local > self.goals_visit:
+        return self.local
+      return self.visit
   
-
   def __str__(self):
     """Return team vs team."""
 
-    return "{}({}) vs {}({})".format(str(self.local),self.goals_local, str(self.visit),self.goals_visit) + " at " + self.date.strftime("%m/%d, %H:%M")
+    return "{}({}) vs {}({})".format(str(self.local),self.goals_local, str(self.visit),self.goals_visit) + " at " + self.start_date.strftime("%m/%d, %H:%M")
