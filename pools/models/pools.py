@@ -1,7 +1,7 @@
 """Pool Models."""
 
 # Django
-from django.models import models
+from django.db import models
 
 class Pool(models.Model):
   """Pool model.

@@ -1,7 +1,7 @@
-"""Prognostication matches model.""""
+"""Prognostication matches model."""
 
 # Django
-from django.models import models
+from django.db import models
 
 class Prognostication(models.Model):
   """Prognostication model
@@ -13,11 +13,26 @@ class Prognostication(models.Model):
 
   points = models.PositiveSmallIntegerField(default=0)
 
-  best_player = models.ForeignKey('tournaments.Player', on_delete=models.CASCADE)
-  top_scorer = models.ForeignKey('tournaments.Player', on_delete=models.CASCADE)
-  best_goalkeeper = models.ForeignKey('tournaments.Player', on_delete=models.CASCADE)
+  prog_best_player = models.ForeignKey(
+    'tournaments.Player', 
+    on_delete=models.CASCADE, 
+    related_name="prog_best_player"
+    )
+  prog_top_scorer = models.ForeignKey(
+    'tournaments.Player', 
+    on_delete=models.CASCADE, 
+    related_name="prog_top_scorer"
+    )
+  prog_best_goalkeeper = models.ForeignKey(
+    'tournaments.Player', 
+    on_delete=models.CASCADE, 
+    related_name="prog_best_goalkeeper"
+    )
+  champion = models.ForeignKey(
+    'tournaments.Team', 
+    on_delete=models.CASCADE,
+    related_name="prog_champion")
 
-  champion_team = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE)
 
   def __str__(self):
     """Return user and his points"""
@@ -28,13 +43,31 @@ class ProgMatch(models.Model):
 
   Handle the pronostication matches that users make for earning points."""
 
-  prognostication = models.ForeignKey('pools.Prognostication', on_delete=models.CASCADE)
-  match = models.ForeignKey('tournaments.Match', on_delete=models.CASCADE)
-  group = models.ForeignKey('tournaments.Group', on_delete=models.CASCADE)
-
-
-  local = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE)
-  visit = models.ForeignKey('tournaments.Team', on_delete=models.CASCADE)
+  prognostication = models.ForeignKey(
+    'pools.Prognostication', 
+    on_delete=models.CASCADE
+    )
+  match = models.ForeignKey(
+    'tournaments.Match', 
+    on_delete=models.CASCADE,
+    related_name="prog_match"
+    )
+  group = models.ForeignKey(
+    'tournaments.Group', 
+    on_delete=models.CASCADE
+    )
+  prog_local = models.ForeignKey(
+    'tournaments.Team', 
+    on_delete=models.CASCADE, 
+    related_name="prog_local",
+    default=None
+    )
+  prog_visit = models.ForeignKey(
+    'tournaments.Team', 
+    on_delete=models.CASCADE,
+    related_name="prog_visit",
+    default=None
+    )
   goals_local = models.PositiveSmallIntegerField(default=0)
   goals_visit = models.PositiveSmallIntegerField(default=0)
 
@@ -48,4 +81,4 @@ class ProgMatch(models.Model):
 
   def __str__(self):
     """Return team vs team."""
-    return "{}({}) vs {}({})".format(str(self.local),self.goals_local, str(self.visit),self.goals_visit))
+    return "{}({}) vs {}({})".format(str(self.local),self.goals_local, str(self.visit),self.goals_visit)
