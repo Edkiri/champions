@@ -21,9 +21,7 @@ class Profile(ChampionBaseModel):
     blank=True,
     null=True
   )
-  biography = models.TextField(max_length=500, blank=True)
-
-  #Stats
+  description = models.TextField(max_length=500, blank=True)
 
   def __str__(self):
     """Return user's str representation."""

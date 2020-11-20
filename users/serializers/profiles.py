@@ -15,5 +15,5 @@ class ProfileModelSerializer(serializers.ModelSerializer):
     model = Profile
     fields = (
       'picture',
-      'biography',
+      'description',
     )
