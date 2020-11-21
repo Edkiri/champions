@@ -9,12 +9,6 @@ class Group(models.Model):
   tournament = models.ForeignKey('tournaments.Tournament', on_delete=models.CASCADE)
   name = models.CharField(max_length=2)
 
-  teams = models.ManyToManyField(
-    'tournaments.Team',
-    through='tournaments.TeamGroupStage',
-    through_fields=('group', 'team')
-  )
-
   GROUP_CHOICES = [
     ('GS', 'Group Stage'),
     ('EF', 'Eighth finals'),

@@ -32,8 +32,6 @@ class TeamGroupStageSerializer(serializers.ModelSerializer):
 class GroupModelSerializer(serializers.ModelSerializer):
   """Tournament groups model serializer."""
 
-  teams = TeamGroupStageSerializer(many=True)
-
   class Meta:
     """Meta class."""
 
@@ -41,5 +39,4 @@ class GroupModelSerializer(serializers.ModelSerializer):
     fields = (
       'phase',
       'name',
-      'teams'
     )
