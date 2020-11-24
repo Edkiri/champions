@@ -13,27 +13,6 @@ class Prognostication(models.Model):
 
   points = models.PositiveSmallIntegerField(default=0)
 
-  prog_best_player = models.ForeignKey(
-    'tournaments.Player', 
-    on_delete=models.CASCADE, 
-    related_name="prog_best_player"
-    )
-  prog_top_scorer = models.ForeignKey(
-    'tournaments.Player', 
-    on_delete=models.CASCADE, 
-    related_name="prog_top_scorer"
-    )
-  prog_best_goalkeeper = models.ForeignKey(
-    'tournaments.Player', 
-    on_delete=models.CASCADE, 
-    related_name="prog_best_goalkeeper"
-    )
-  champion = models.ForeignKey(
-    'tournaments.Team', 
-    on_delete=models.CASCADE,
-    related_name="prog_champion")
-
-
   def __str__(self):
     """Return user and his points"""
     return f'{str(self.member.user)} {self.points} points'
@@ -71,14 +50,17 @@ class ProgMatch(models.Model):
   goals_local = models.PositiveSmallIntegerField(default=0)
   goals_visit = models.PositiveSmallIntegerField(default=0)
 
+  has_rated = models.BooleanField(default=False)
+  points = models.PositiveSmallIntegerField(default=0)
+
   @property
   def winning_team(self):
     if self.goals_local == self.goals_visit:
       return None
     elif self.goals_local > self.goals_visit:
-      return self.local
-    return self.visit
+      return self.prog_local
+    return self.prog_visit
 
   def __str__(self):
     """Return team vs team."""
-    return "{}({}) vs {}({})".format(str(self.local),self.goals_local, str(self.visit),self.goals_visit)
+    return "{}({}) vs {}({})".format(str(self.prog_local),self.goals_local, str(self.prog_visit),self.goals_visit)

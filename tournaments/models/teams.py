@@ -36,8 +36,8 @@ class TeamTournament(models.Model):
   tied = models.PositiveSmallIntegerField(default=0)
   goals_scored = models.PositiveSmallIntegerField(default=0)
   goals_received = models.PositiveSmallIntegerField(default=0)
-  match_played = models.PositiveSmallIntegerField(default=0)
+  matches_played = models.PositiveSmallIntegerField(default=0)
 
   def __str__(self):
     """Return team name."""
-    return self.team
+    return str(self.team)

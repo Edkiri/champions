@@ -9,6 +9,8 @@ class Group(models.Model):
   tournament = models.ForeignKey('tournaments.Tournament', on_delete=models.CASCADE)
   name = models.CharField(max_length=2)
 
+  teams = models.ManyToManyField('tournaments.Team', related_name="grop_teams")
+
   GROUP_CHOICES = [
     ('GS', 'Group Stage'),
     ('EF', 'Eighth finals'),
@@ -43,7 +45,7 @@ class TeamGroupStage(models.Model):
   tied = models.PositiveSmallIntegerField(default=0)
   goals_scored = models.PositiveSmallIntegerField(default=0)
   goals_received = models.PositiveSmallIntegerField(default=0)
-  matchs_played = models.PositiveSmallIntegerField(default=0)
+  matches_played = models.PositiveSmallIntegerField(default=0)
 
   def get_average_goal(self):
     return self.goals_scored - self.goals_received

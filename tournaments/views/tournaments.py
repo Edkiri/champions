@@ -32,21 +32,6 @@ class TournamentViewSet(mixins.RetrieveModelMixin,
     self.tournament = get_object_or_404(Tournament, slug_name=slug_name)
     return super(TournamentViewSet, self).dispatch(request, *args, **kwargs)
 
-  def retrieve(self, request, *args, **kwargs):
-    """Add extra data to the response."""
-    response = super(TournamentViewSet, self).retrieve(request, *args, **kwargs)
-    tournament = self.get_object()
-    matches = Match.objects.filter(
-      tournament=tournament,
-      is_defined = True
-    )
-    data = {
-      'tournament': response.data,
-      'matches': MatchModelSerializer(matches, many=True).data
-    }
-    response.data = data
-    return response
-
   @action(detail=True, methods=['get'])
   def groups(self, request, *args, **kwargs):
     groups = Group.objects.filter(tournament=self.tournament, phase='GS')
@@ -54,4 +39,13 @@ class TournamentViewSet(mixins.RetrieveModelMixin,
     for group in groups:
       stats = TeamGroupStage.objects.filter(group=group)
       data[str(group)] = TeamGroupStageSerializer(stats, many=True).data
+    return Response(data)
+
+  @action(detail=True, methods=['get'])
+  def finals(self, request, *args, **kwargs):
+    groups = Group.objects.filter(tournament=self.tournament).exclude(phase='GS')
+    data = {}
+    for group in groups:
+      matches = Match.objects.filter(group=group)
+      data[str(group)] = MatchModelSerializer(matches, many=True).data
     return Response(data)

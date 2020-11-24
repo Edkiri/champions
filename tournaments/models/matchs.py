@@ -31,6 +31,8 @@ class Match(models.Model):
 
   # True when opponents are defined
   is_defined = models.BooleanField(default=False)
+  # Setting to True when update team stats.
+  is_pointed = models.BooleanField(default=False)
 
   @property
   def winning_team(self):

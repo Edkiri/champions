@@ -23,16 +23,8 @@ class Tournament(models.Model):
   )
   is_finished = models.BooleanField(default=False)
 
+  teams = models.ManyToManyField('tournaments.Team', related_name="teams")
+
   def __str__(self):
     """Return Turnament name."""
     return self.name
-
-class TournamentStats(models.Model):
-  """Tournaments stats.
-
-  Store util information for the end of the tournament.
-  """
-
-  best_player = models.ForeignKey('tournaments.Player', on_delete=models.CASCADE, related_name="best_player") 
-  top_scorer = models.ForeignKey('tournaments.Player', on_delete=models.CASCADE, related_name="top_scorer") 
-  best_goalkeeper = models.ForeignKey('tournaments.Player', on_delete=models.CASCADE, related_name="best_goalkeeper") 

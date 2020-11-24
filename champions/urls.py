@@ -14,4 +14,5 @@ urlpatterns = [
     path('', include(('users.urls', 'users'), namespace='users')),
     path('', include(('tournaments.urls', 'tournaments'), namespace='tournaments')),
     path('', include(('circles.urls', 'circles'), namespace='circles')),
+    path('', include(('pools.urls', 'pools'), namespace='pools')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

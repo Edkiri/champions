@@ -22,10 +22,11 @@ class MatchModelSerializer(serializers.ModelSerializer):
 
     model = Match
     fields = (
+      'pk',
       'local',
       'visit',
       'goals_local',
       'goals_visit',
-      'start_date',
       'is_finished',
-      'group')
+      'group'
+    )
